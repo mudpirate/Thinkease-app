@@ -1,0 +1,55 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import Navbar from "./Navbar";
+import { motion } from "framer-motion";
+import { X } from "lucide-react";
+
+export default function Hero() {
+  return (
+    <div className="">
+      <section className="relative  h-[100vh] flex  flex-col  items-center justify-center">
+        <Navbar />
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/11.png" // Replace with your own image in public/
+            alt="Calm therapy background"
+            fill
+            priority
+            className="shadow-[0_40px_40px_-10px_rgba(255,255,255,0.9)]"
+          />
+          {/* Inset Overlay */}
+
+          <div className="absolute inset-0 backdrop-blur-sm" />
+        </div>
+
+        {/* Text Content */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="relative z-10 text-center mt-15 px-6"
+        >
+          <h1 className="text-6xl sm:text-9xl font-bold text-white  ">
+            Find Your{" "}
+            <span className="text-sky-300 italic font-mono">Calm</span>
+          </h1>
+
+          <p className="mt-7 text-lg text-white font-semibold max-w-2xl mx-auto">
+            Your AI-powered companion for calm, care, and clarity, whenever you
+            need it. Always here to listen, guide, and uplift you through life’s
+            challenges.
+          </p>
+          <Link
+            href="/dashboard"
+            className="inline-block mt-12 px-6 py-3 bg-black hover:bg-teal-400 text-white font-semibold rounded-full shadow-lg transition"
+          >
+            {"Start your journey "}
+          </Link>
+        </motion.div>
+      </section>
+    </div>
+  );
+}
