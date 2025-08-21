@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-gradient-to-tl from-[#4795e4] via-[#2e6ead] to-[#87CEFA] dark:bg-black;
+  @apply bg-gradient-to-tl from-[#4795e4] via-[#3f95eb] to-[#87CEFA] dark:bg-black;
 }
 
 @layer base {

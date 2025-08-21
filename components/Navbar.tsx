@@ -7,8 +7,11 @@ import { IoMenu, IoClose } from "react-icons/io5";
 import { SignInButton } from "./auth/signin";
 
 import { ThemeToggle } from "./themetoggle";
+type NavbarProps = {
+  isHome?: boolean;
+};
 
-export default function Navbar() {
+export default function Navbar({ isHome }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
@@ -26,7 +29,12 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="absolute top-0  backdrop-blur-xs    left-0 w-full z-20">
+    <nav
+      className={` ${
+        isHome ? "" : "dark:bg-black"
+      } absolute top-0    backdrop-blur-xs    left-0 w-full z-20`}
+    >
+      <nav className="absolute top-0    backdrop-blur-xs    left-0 w-full z-20"></nav>
       <div className="max-w-7xl mx-auto px-2  ">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
@@ -44,7 +52,7 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="hover:text-gray-200 text-lg  font-bold text-white transition-colors"
+                className="hover:text-gray-200 text-xl font-semibold  text-white transition-colors"
               >
                 {link.name}
               </Link>

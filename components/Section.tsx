@@ -7,7 +7,7 @@ export default function FeaturesSection() {
   const features = [
     {
       icon: (
-        <div className="text-teal-600 text-4xl mb-4">
+        <div className="text-black dark:text-white text-4xl mb-4">
           <FaComments />
         </div>
       ),
@@ -17,7 +17,7 @@ export default function FeaturesSection() {
     },
     {
       icon: (
-        <div className="text-pink-500 text-4xl mb-4">
+        <div className="text-black dark:text-white text-4xl mb-4">
           <FaHeartbeat />
         </div>
       ),
@@ -27,7 +27,7 @@ export default function FeaturesSection() {
     },
     {
       icon: (
-        <div className="text-cyan-500 text-4xl mb-4">
+        <div className="text-black dark:text-white text-4xl mb-4">
           <FaBrain />
         </div>
       ),
@@ -55,7 +55,7 @@ export default function FeaturesSection() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="flex flex-col justify-center  items-center bg-white/90 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-8 rounded-2xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300"
+              className="flex flex-col justify-center  items-center bg-white/90 dark:bg-black/80 border dark:border-2 dark:border-white border-gray-200  p-8 rounded-2xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300"
             >
               <div>{feature.icon}</div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">

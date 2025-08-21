@@ -1,0 +1,83 @@
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T11:14:18.693Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T11:14:18.701Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-08-21T11:22:05.671Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3000/api/inngest","timestamp":"2025-08-21T11:22:07.323Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-08-21T11:22:40.761Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3000/api/inngest","timestamp":"2025-08-21T11:22:51.044Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T11:24:42.739Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T11:24:42.743Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T11:33:02.487Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T11:33:02.490Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T11:33:13.788Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T11:33:13.792Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T11:33:43.672Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T11:33:43.675Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T11:37:51.023Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T11:37:51.028Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T11:37:51.747Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T13:47:31.191Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T13:47:31.196Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T13:47:31.925Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T13:48:50.131Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T13:48:50.135Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T13:48:51.200Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T13:49:33.426Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T13:49:33.431Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T13:49:34.218Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T13:53:22.612Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T13:53:22.619Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T13:53:23.408Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T13:53:29.437Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T13:53:29.440Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T13:53:30.097Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T13:53:46.916Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T13:53:46.920Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T13:53:48.783Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T15:04:04.091Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T15:04:04.095Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T15:04:05.076Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T15:17:25.951Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T15:17:25.955Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T15:17:26.893Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T15:19:06.887Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T15:19:06.891Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T15:19:07.979Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T15:24:46.359Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T15:24:46.363Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T15:24:47.527Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T15:38:58.224Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T15:38:58.227Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T15:38:59.279Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T15:47:01.431Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T15:47:01.434Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T15:47:02.490Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T15:59:00.740Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T15:59:00.744Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T15:59:03.492Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T15:59:09.371Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T15:59:09.375Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T15:59:10.168Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T15:59:18.665Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T15:59:18.670Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T15:59:19.649Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T15:59:28.540Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T15:59:28.546Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T15:59:30.116Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T16:00:30.442Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T16:00:30.451Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T16:00:31.629Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T16:03:15.773Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T16:03:15.777Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T16:03:17.529Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T16:04:12.754Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T16:04:12.758Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T16:04:13.350Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T16:04:27.457Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T16:04:27.462Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T16:04:31.651Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T17:28:21.361Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T17:28:21.364Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T17:28:21.919Z"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-08-21T17:28:51.889Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-08-21T17:28:51.892Z"}
+{"level":"info","message":"connected to the mongoDB","timestamp":"2025-08-21T17:28:52.427Z"}

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   Brain,
   Calendar,
@@ -44,13 +45,22 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
+import { MoodForm } from "@/components/mood/mood-form";
+import { AnxietyGames } from "@/components/games/anxiety-games";
+import { ActivityLogger } from "@/components/activities/activity-logger";
+
 export default function DashboardPage() {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [showMoodModal, setShowMoodModal] = useState(false);
+  const [isSavingMood, setIsSavingMood] = useState(false);
+  const router = useRouter();
+  const [showActivityLogger, setShowActivityLogger] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
+
   const wellnessStats = [
     {
       title: "Mood Score",
@@ -86,20 +96,39 @@ export default function DashboardPage() {
     },
   ];
 
+  const handleMoodSubmit = async (data: { moodScore: number }) => {
+    setIsSavingMood(true);
+    try {
+      setShowMoodModal(false);
+    } catch (error) {
+      console.error("Error saving mood:", error);
+    } finally {
+      setIsSavingMood(false);
+    }
+  };
+
+  const handleAICheckIn = () => {
+    setShowActivityLogger(true);
+  };
+
+  const handleStartTherapy = () => {
+    router.push("/therapy/new");
+  };
+
   return (
-    <div className="min-h-screen  py-8 w-full max-w-7xl ">
+    <div className="min-h-screen dark:bg-black py-8 w-full max-w-7xl ">
       <Container className="pt-20 pb-8 space-y-6">
         {/* Header Section */}
-        <div className="flex bg-white px-5 py-5 rounded-xl justify-between items-center">
+        <div className="flex bg-white px-5 py-5 rounded-xl dark:bg-black border-2 dark:border-white justify-between items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="space-y-2"
+            className="space-y-2 "
           >
-            <h1 className="text-3xl font-bold text-black">
-              Welcome back, LOdu
+            <h1 className="text-3xl font-bold dark:text-white text-black">
+              Welcome back, Pirate
             </h1>
-            <p className="text-gray-800">
+            <p className="text-gray-800 dark:text-white">
               {currentTime.toLocaleDateString("en-US", {
                 weekday: "long",
                 month: "long",
@@ -108,8 +137,8 @@ export default function DashboardPage() {
             </p>
           </motion.div>
           <div className="flex items-center gap-4">
-            <Button variant="outline" size="icon">
-              <Bell className="h-5 w-5" />
+            <Button className="dark:border-white border-2" size="icon">
+              <Bell className="h-5  w-5" />
             </Button>
           </div>
         </div>
@@ -119,8 +148,8 @@ export default function DashboardPage() {
           {/* Top Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4">
             {/* Quick Actions Card */}
-            <Card className="border-primary/10 relative overflow-hidden group">
-              <div className="absolute inset-0 bg-white" />
+            <Card className="relative dark:bg-black border-2 dark:border-white overflow-hidden group">
+              <div className="absolute inset-0 bg-white dark:bg-black  " />
               <CardContent className="p-6 relative">
                 <div className="space-y-6">
                   <div className="flex items-center gap-3">
@@ -128,7 +157,7 @@ export default function DashboardPage() {
                       <Sparkles className="w-5 h-5 text-black" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-black text-lg">
+                      <h3 className="font-semibold text-black dark:text-white text-lg">
                         Quick Actions
                       </h3>
                       <p className="text-sm text-muted-foreground">
@@ -145,6 +174,7 @@ export default function DashboardPage() {
                         "bg-blue-500 hover:bg-blue-700",
                         "transition-all duration-200 group-hover:translate-y-[-2px]"
                       )}
+                      onClick={handleStartTherapy}
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
@@ -170,8 +200,9 @@ export default function DashboardPage() {
                         className={cn(
                           "flex flex-col h-[120px] px-4 py-3 group/mood hover:border-primary/50",
                           "justify-center items-center text-center",
-                          "transition-all duration-200 group-hover:translate-y-[-2px]"
+                          "transition-all duration-200 group-hover:translate-y-[-2px] dark:border-1 dark:border-white"
                         )}
+                        onClick={() => setShowMoodModal(true)}
                       >
                         <div className="w-10 h-10 rounded-full bg-rose-500/10 flex items-center justify-center mb-2">
                           <Heart className="w-5 h-5 text-rose-500" />
@@ -189,8 +220,9 @@ export default function DashboardPage() {
                         className={cn(
                           "flex flex-col h-[120px] px-4 py-3 group/ai hover:border-primary/50",
                           "justify-center items-center text-center",
-                          "transition-all duration-200 group-hover:translate-y-[-2px]"
+                          "transition-all duration-200 group-hover:translate-y-[-2px] dark:border-1 dark:border-white"
                         )}
+                        onClick={handleAICheckIn}
                       >
                         <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center mb-2">
                           <BrainCircuit className="w-5 h-5 text-blue-500" />
@@ -209,7 +241,7 @@ export default function DashboardPage() {
             </Card>
 
             {/* Today's Overview Card */}
-            <Card className="border-primary/10">
+            <Card className="dark:border-2 dark:border-white">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
@@ -274,12 +306,28 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Left side - Spans 2 columns */}
             <div className="lg:col-span-3 space-y-6">
-              {/* Anxiety Games - Now directly below Fitbit */}
+              <AnxietyGames />
               {/* <AnxietyGames onGamePlayed={handleGamePlayed} /> */}
             </div>
           </div>
         </div>
       </Container>
+      <Dialog open={showMoodModal} onOpenChange={setShowMoodModal}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>How are you feeling?</DialogTitle>
+            <DialogDescription>
+              Move the slider to track your current mood
+            </DialogDescription>
+          </DialogHeader>
+          <MoodForm onSuccess={() => setShowMoodModal(false)} />
+        </DialogContent>
+      </Dialog>
+
+      <ActivityLogger
+        open={showActivityLogger}
+        onOpenChange={setShowActivityLogger}
+      />
     </div>
   );
 }

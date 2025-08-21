@@ -16,49 +16,49 @@ import Navbar from "@/components/Navbar";
 
 const features = [
   {
-    icon: <Bot className="w-10 h-10 text-black" />,
+    icon: <Bot className="w-10 h-10 text-black dark:text-white " />,
     title: "AI-Powered Therapy",
     description:
       "24/7 access to empathetic AI agents trained in various therapeutic approaches, providing personalized mental health support.",
   },
   {
-    icon: <Shield className="w-10 h-10 text-black" />,
+    icon: <Shield className="w-10 h-10 text-black dark:text-white" />,
     title: "Blockchain Security",
     description:
       "Your therapy sessions are secured by blockchain technology, ensuring complete privacy and transparent record-keeping.",
   },
   {
-    icon: <Brain className="w-10 h-10 text-black" />,
+    icon: <Brain className="w-10 h-10 text-black dark:text-white" />,
     title: "Smart Analysis",
     description:
       "Advanced NLP and emotion detection helps understand your mental state and provide appropriate interventions.",
   },
   {
-    icon: <Activity className="w-10 h-10 text-black" />,
+    icon: <Activity className="w-10 h-10 text-black dark:text-white" />,
     title: "Crisis Detection",
     description:
       "Real-time monitoring and emergency response protocols to ensure your safety during critical situations.",
   },
   {
-    icon: <Wifi className="w-10 h-10 text-black" />,
+    icon: <Wifi className="w-10 h-10 text-black dark:text-white" />,
     title: "IoT Integration",
     description:
       "Connect with smart home devices to create an ambient therapeutic environment that adapts to your needs.",
   },
   {
-    icon: <LineChart className="w-10 h-10 text-black" />,
+    icon: <LineChart className="w-10 h-10 text-black dark:text-white" />,
     title: "Progress Tracking",
     description:
       "Detailed analytics and insights about your mental health journey, with blockchain-verified session records.",
   },
   {
-    icon: <Fingerprint className="w-10 h-10 text-black" />,
+    icon: <Fingerprint className="w-10 h-10 text-black dark:text-white" />,
     title: "Privacy First",
     description:
       "End-to-end encryption and zero-knowledge proofs ensure your data remains completely confidential.",
   },
   {
-    icon: <Heart className="w-10 h-10 text-black" />,
+    icon: <Heart className="w-10 h-10 text-black dark:text-white" />,
     title: "Holistic Care",
     description:
       "Integration with wearables and health providers for comprehensive mental wellness monitoring.",
@@ -67,8 +67,8 @@ const features = [
 
 export default function FeaturesPage() {
   return (
-    <div>
-      <div className="container mx-auto px-4 py-10 mt-20">
+    <div className="dark:bg-black border  ">
+      <div className="container mx-auto px-4 py-20 ">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -92,14 +92,16 @@ export default function FeaturesPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card className="p-6 h-full hover:shadow-lg transition-shadow duration-300 bg-white backdrop-blur-md ">
+              <Card className="p-6 h-full hover:shadow-lg transition-shadow dark:bg-black/80 dark:border-2 dark:border-white duration-300 bg-white backdrop-blur-md ">
                 <div className="mb-4 ">
-                  <h1 className="">{feature.icon}</h1>
+                  <h1 className=" ">{feature.icon}</h1>
                 </div>
-                <h3 className="text-xl font-semibold text-black mb-2">
+                <h3 className="text-xl font-semibold text-black dark:text-white mb-2">
                   {feature.title}
                 </h3>
-                <p className=" text-gray-600">{feature.description}</p>
+                <p className=" text-gray-600 dark:text-gray-500">
+                  {feature.description}
+                </p>
               </Card>
             </motion.div>
           ))}

@@ -10,7 +10,9 @@ interface SignInButtonProps {
 export function SignInButton({ className }: SignInButtonProps) {
   return (
     <Button asChild className={className}>
-      <Link href="/login">Login</Link>
+      <Link href="/login" className="hover:bg-gray-800">
+        Login
+      </Link>
     </Button>
   );
 }

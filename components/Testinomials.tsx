@@ -35,12 +35,12 @@ export default function Testimonials() {
           {testimonials.map((t, index) => (
             <div
               key={index}
-              className="bg-white border hover:scale-105 ease-in-out  rounded-2xl p-6 shadow-lg hover:shadow-2xl transition"
+              className="bg-white dark:bg-black/80 border dark:border-2 dark:border-white hover:scale-105 ease-in-out  rounded-2xl p-6 shadow-lg hover:shadow-2xl transition"
             >
               <div className="text-blue-400 text-2xl mb-4">
                 <FaQuoteLeft />
               </div>
-              <p className="text-gray-600 text-sm leading-relaxed mb-6">
+              <p className="text-gray-600 dark:text-white text-sm leading-relaxed mb-6">
                 {t.text}
               </p>
               <div className="flex items-center gap-4">

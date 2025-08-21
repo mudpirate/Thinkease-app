@@ -8,9 +8,9 @@ export default function AboutUs() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen  dark:from-gray-900 dark:to-gray-950 py-16 px-6 mt-20"
+      className="min-h-screen  dark:bg-black py-20 px-6 "
     >
-      <div className="max-w-5xl mx-auto text-center">
+      <div className="max-w-5xl mx-auto  text-center">
         {/* Heading */}
         <h2 className="text-7xl font-bold text-white dark:text-white mb-6">
           About
@@ -30,11 +30,11 @@ export default function AboutUs() {
         className="mt-16 grid grid-cols-1 md:grid-cols-1 gap-8 max-w-6xl mx-auto"
       >
         {/* Card 1 */}
-        <div className=" dark:bg-gray-800 p-8 rounded-2xl bg-white border shadow-lg hover:shadow-xl transition">
-          <h3 className="text-xl font-semibold text-black dark:text-black mb-4">
+        <div className="  p-8 rounded-2xl dark:border-2 dark:border-white dark:bg-black bg-white border shadow-lg hover:shadow-xl transition">
+          <h3 className="text-xl font-semibold text-black dark:text-white mb-4">
             AI-Powered Support
           </h3>
-          <p className="text-gray-400 dark:text-gray-600">
+          <p className="text-gray-400 dark:text-gray-400">
             Our intelligent system listens and responds with empathy, offering
             personalized strategies and resources to help you manage stress and
             anxiety.
@@ -42,8 +42,8 @@ export default function AboutUs() {
         </div>
 
         {/* Card 2 */}
-        <div className=" dark:bg-gray-800 p-8 rounded-2xl border bg-white shadow-lg hover:shadow-xl transition">
-          <h3 className="text-xl font-semibold  text-black dark:text-black mb-4">
+        <div className=" dark:border-2 dark:border-white dark:bg-black p-8 rounded-2xl border bg-white shadow-lg hover:shadow-xl transition">
+          <h3 className="text-xl font-semibold  text-black dark:text-white mb-4">
             Privacy First
           </h3>
           <p className="text-gray-400 dark:text-gray-300">
@@ -53,8 +53,8 @@ export default function AboutUs() {
         </div>
 
         {/* Card 3 */}
-        <div className=" dark:bg-gray-800 p-8 rounded-2xl border bg-white shadow-lg hover:shadow-xl transition">
-          <h3 className="text-xl font-semibold text-black dark:text-black mb-4">
+        <div className=" dark:border-2 dark:border-white dark:bg-black p-8 rounded-2xl border bg-white shadow-lg hover:shadow-xl transition">
+          <h3 className="text-xl font-semibold text-black dark:text-white mb-4">
             Accessible to All
           </h3>
           <p className="text-gray-400 dark:text-gray-300">

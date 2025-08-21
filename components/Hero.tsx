@@ -10,7 +10,6 @@ export default function Hero() {
   return (
     <div className="">
       <section className="relative  h-[100vh] flex  flex-col  items-center justify-center">
-        <Navbar />
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
@@ -18,11 +17,11 @@ export default function Hero() {
             alt="Calm therapy background"
             fill
             priority
-            className="shadow-[0_40px_40px_-10px_rgba(255,255,255,0.9)]"
+            className=""
           />
           {/* Inset Overlay */}
 
-          <div className="absolute inset-0 backdrop-blur-sm" />
+          <div className="absolute inset-0 dark:bg-black/50 backdrop-blur-sm" />
         </div>
 
         {/* Text Content */}
@@ -44,7 +43,7 @@ export default function Hero() {
           </p>
           <Link
             href="/dashboard"
-            className="inline-block mt-12 px-6 py-3 bg-black hover:bg-teal-400 text-white font-semibold rounded-full shadow-lg transition"
+            className="inline-block mt-12 px-6 py-3 bg-black hover:bg-gray-700 text-white font-semibold rounded-full shadow-lg transition"
           >
             {"Start your journey "}
           </Link>
