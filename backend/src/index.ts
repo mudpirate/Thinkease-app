@@ -9,7 +9,12 @@ import { errorHandler } from "./middleware/errorHandler";
 import { logger } from "./utils/logger";
 import { functions as inngestFunctions } from "./inngest/functions";
 import { connectDB } from "./utils/db";
+import authRouter from "./routes/auth";
+import chatRouter from "./routes/chat";
+import moodRouter from "./routes/mood";
+import activityRouter from "./routes/activity";
 import dotenv from "dotenv";
+
 dotenv.config();
 const app = express();
 
@@ -28,6 +33,11 @@ app.use(
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello from Express + TypeScript!");
 });
+
+app.use("/auth", authRouter);
+app.use("/chat", chatRouter);
+app.use("/api/mood", moodRouter);
+app.use("/api", activityRouter);
 
 app.use(errorHandler);
 // Start server

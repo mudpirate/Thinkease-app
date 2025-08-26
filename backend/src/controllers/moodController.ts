@@ -29,16 +29,6 @@ export const createMood = async (
     await mood.save();
     logger.info(`Mood entry created for user ${userId}`);
 
-    // // Send mood update event to Inngest
-    // await sendMoodUpdateEvent({
-    //   userId,
-    //   mood: score,
-    //   note,
-    //   context,
-    //   activities,
-    //   timestamp: mood.timestamp,
-    // });
-
     res.status(201).json({
       success: true,
       data: mood,

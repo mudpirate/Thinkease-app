@@ -28,7 +28,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.2 }}
           className="relative z-10 text-center mt-15 px-6"
         >
           <h1 className="text-6xl sm:text-9xl font-bold text-white  ">

@@ -12,10 +12,8 @@ export default function AboutUs() {
     >
       <div className="max-w-5xl mx-auto  text-center">
         {/* Heading */}
-        <h2 className="text-7xl font-bold text-white dark:text-white mb-6">
-          About
-        </h2>
-        <p className="text-lg text-gray-300 dark:text-gray-300 max-w-3xl mx-auto">
+
+        <p className="text-xl mt-12 text-white dark:text-gray-300 max-w-3xl mx-auto">
           At Thinkease, we believe mental well-being should be accessible,
           private, and stigma-free. That’s why we built an AI-powered therapist
           designed to help you reflect, grow, and find calm — anytime, anywhere.

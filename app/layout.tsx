@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { Providers } from "@/components/provider";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
+import { SessionProvider } from "@/lib/context/session-context";
 
 export default function RootLayout({
   children,
