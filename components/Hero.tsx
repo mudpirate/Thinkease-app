@@ -2,11 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "./Navbar";
+
 import { motion } from "framer-motion";
+import Router, { useRouter } from "next/router";
 import { X } from "lucide-react";
+import { useSession } from "@/lib/context/session-context";
 
 export default function Hero() {
+ 
+  const {isAuthenticated} = useSession()
   return (
     <div className="">
       <section className="relative  h-[100vh] flex  flex-col  items-center justify-center">
@@ -42,7 +46,7 @@ export default function Hero() {
             challenges.
           </p>
           <Link
-            href="/dashboard"
+            href={isAuthenticated ? "/dashboard" : "/login"}
             className="inline-block mt-12 px-6 py-3 bg-black hover:bg-gray-700 text-white font-semibold rounded-full shadow-lg transition"
           >
             {"Start your journey "}

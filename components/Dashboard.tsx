@@ -41,9 +41,12 @@ import {
 import { MoodForm } from "@/components/mood/mood-form";
 import { AnxietyGames } from "@/components/games/anxiety-games";
 import { ActivityLogger } from "@/components/activities/activity-logger";
+import { useSession } from "@/lib/context/session-context";
 
 export default function DashboardPage() {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const {user} = useSession()
+  
   const [showMoodModal, setShowMoodModal] = useState(false);
   const [isSavingMood, setIsSavingMood] = useState(false);
   const router = useRouter();
@@ -119,7 +122,7 @@ export default function DashboardPage() {
             className="space-y-2 "
           >
             <h1 className="text-3xl font-bold dark:text-white text-black">
-              Good to see you, Pirate
+              Good to see you, {user?.name || "user"}
             </h1>
             <p className="text-gray-800 dark:text-white">
               {currentTime.toLocaleDateString("en-US", {

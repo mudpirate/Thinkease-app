@@ -8,6 +8,7 @@ import { Container } from "@/components/ui/Container";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Mail, User, Lock } from "lucide-react";
+import { registerUser } from "@/lib/api/auth";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -17,6 +18,24 @@ export default function SignupPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+    setLoading(true);
+    try {
+      await registerUser(name, email, password);
+      router.push("/login");
+    } catch (err: any) {
+      setError(err.message || "Signup failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center ">
@@ -30,7 +49,7 @@ export default function SignupPage() {
               Create your account
             </p>
           </div>
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-3">
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex-1">
@@ -46,7 +65,7 @@ export default function SignupPage() {
                       id="name"
                       type="text"
                       placeholder="Enter your name"
-                      className="pl-12 py-2 text-base rounded-xl bg-card bg-opacity-80 border border-primary focus:outline-none focus:ring-2 focus:ring-primary text-white placeholder:text-muted-foreground"
+                      className="pl-12 py-2 text-base  rounded-xl bg-card bg-opacity-80 border border-primary focus:outline-none focus:ring-2 focus:ring-primary text-black placeholder:text-muted-foreground"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
@@ -87,7 +106,7 @@ export default function SignupPage() {
                     id="password"
                     type="password"
                     placeholder="Enter your password"
-                    className="pl-12 py-2 text-base rounded-xl bg-card bg-opacity-80 border border-primary focus:outline-none focus:ring-2 focus:ring-primary text-white placeholder:text-muted-foreground"
+                    className="pl-12 py-2 text-base rounded-xl bg-card bg-opacity-80 border border-primary focus:outline-none focus:ring-2 focus:ring-primary text-black placeholder:text-muted-foreground"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -107,7 +126,7 @@ export default function SignupPage() {
                     id="confirmPassword"
                     type="password"
                     placeholder="Confirm your password"
-                    className="pl-12 py-2 text-base rounded-xl bg-card bg-opacity-80 border border-primary focus:outline-none focus:ring-2 focus:ring-primary text-white placeholder:text-muted-foreground"
+                    className="pl-12 py-2 text-base rounded-xl bg-card bg-opacity-80 border border-primary focus:outline-none focus:ring-2 focus:ring-primary text-black placeholder:text-muted-foreground"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required

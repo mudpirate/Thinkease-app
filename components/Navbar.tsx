@@ -4,15 +4,27 @@ import Link from "next/link";
 import { useState } from "react";
 import { FaBrain } from "react-icons/fa";
 import { IoMenu, IoClose } from "react-icons/io5";
+import {
+  Heart,
+  Menu,
+  X,
+  MessageCircle,
+  AudioWaveform,
+  LogOut,
+  LogIn,
+} from "lucide-react";
 import { SignInButton } from "./auth/signin";
-
+import { useSession } from "@/lib/context/session-context";
 import { ThemeToggle } from "./themetoggle";
+import { Button } from "@/components/ui/button";
+
 type NavbarProps = {
   isHome?: boolean;
 };
 
 export default function Navbar({ isHome }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const { isAuthenticated, logout, user } = useSession();
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -31,7 +43,7 @@ export default function Navbar({ isHome }: NavbarProps) {
   return (
     <nav
       className={` ${
-        isHome ? "" : "dark:bg-black"
+        isHome ? "" : ""
       } absolute top-0    backdrop-blur-xs    left-0 w-full z-20`}
     >
       <nav className="absolute top-0    backdrop-blur-xs    left-0 w-full z-20"></nav>
@@ -61,7 +73,23 @@ export default function Navbar({ isHome }: NavbarProps) {
 
           <div className="hidden  md:flex justify-end items-center gap-3 md:flex-1 ">
             <ThemeToggle />
-            <SignInButton />
+            
+            {isAuthenticated ? (
+                <>
+               
+                  <Button
+                   
+                    onClick={logout}
+                    className="text-white  bg-black hover:text-foreground transition-colors"
+                  >
+                    
+                    Sign out
+                  </Button>
+                </>
+              ) : (
+                <SignInButton />
+              )}
+       
           </div>
           <div className=" flex mx-2 md:hidden">
             {" "}

@@ -4,6 +4,7 @@ import {
   getChatSession,
   sendMessage,
   getChatHistory,
+  getAllChatSessions
 } from "../controllers/chat";
 import { auth } from "../middleware/auth";
 
@@ -15,6 +16,9 @@ router.use(auth);
 // Create a new chat session
 router.post("/sessions", createChatSession);
 
+// Get all chat sessions (MUST come before parameterized routes)
+router.get("/sessions", getAllChatSessions);
+
 // Get a specific chat session
 router.get("/sessions/:sessionId", getChatSession);
 
@@ -25,6 +29,3 @@ router.post("/sessions/:sessionId/messages", sendMessage);
 router.get("/sessions/:sessionId/history", getChatHistory);
 
 export default router;
-
-// let response = pm.response.json()
-// pm.globals.set("access_token", response.access_token)

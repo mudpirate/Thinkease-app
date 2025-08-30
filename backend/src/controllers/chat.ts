@@ -9,9 +9,12 @@ import { InngestSessionResponse, InngestEvent } from "../types/inngest";
 import { Types } from "mongoose";
 
 // Initialize Gemini API
-const genAI = new GoogleGenerativeAI(
-  process.env.GEMINI_API_KEY || "AIzaSyBCBz3wQu9Jjd_icCDZf-17CUO_O8IynwI"
-);
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "AIzaSyCWQD7wsFV_OHCJLPoYdvwVCMQY3MIZPNg";
+if (!GEMINI_API_KEY) {
+  logger.error("GEMINI_API_KEY environment variable is not set");
+}
+
+const genAI = new GoogleGenerativeAI(GEMINI_API_KEY || "AIzaSyCWQD7wsFV_OHCJLPoYdvwVCMQY3MIZPNg");
 
 // Create a new chat session
 export const createChatSession = async (req: Request, res: Response) => {
@@ -53,6 +56,34 @@ export const createChatSession = async (req: Request, res: Response) => {
       message: "Error creating chat session",
       error: error instanceof Error ? error.message : "Unknown error",
     });
+  }
+};
+
+// Get all chat sessions for a user
+export const getAllChatSessions = async (req: Request, res: Response) => {
+  try {
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const userId = new Types.ObjectId(req.user.id);
+    const sessions = await ChatSession.find({ userId })
+      .sort({ startTime: -1 })
+      .limit(50);
+
+    const formattedSessions = sessions.map(session => ({
+      sessionId: session.sessionId,
+      messages: session.messages,
+      createdAt: session.startTime,
+      updatedAt: session.messages.length > 0 
+      ? session.messages[session.messages.length - 1]?.timestamp || session.startTime
+      : session.startTime,
+    }));
+
+    res.json(formattedSessions);
+  } catch (error) {
+    logger.error("Error fetching chat sessions:", error);
+    res.status(500).json({ message: "Error fetching sessions" });
   }
 };
 
@@ -110,6 +141,13 @@ export const sendMessage = async (req: Request, res: Response) => {
     await inngest.send(event);
 
     // Process the message directly using Gemini
+    if (!GEMINI_API_KEY) {
+      return res.status(500).json({
+        message: "AI service not configured",
+        error: "GEMINI_API_KEY is not set"
+      });
+    }
+
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
     // Analyze the message

@@ -1,50 +1,181 @@
-import { NextRequest, NextResponse } from "next/server";
+export interface ChatMessage {
+  role: "user" | "assistant";
+  content: string;
+  timestamp: Date;
+  metadata?: {
+    technique: string;
+    goal: string;
+    progress: any[];
+    analysis?: {
+      emotionalState: string;
+      themes: string[];
+      riskLevel: number;
+      recommendedApproach: string;
+      progressIndicators: string[];
+    };
+  };
+}
 
-const BACKEND_API_URL = process.env.BACKEND_API_URL;
+export interface ChatSession {
+  sessionId: string;
+  messages: ChatMessage[];
+  createdAt: Date;
+  updatedAt: Date;
+}
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { sessionId: string } }
-) {
+export interface ApiResponse {
+  message: string;
+  response?: string;
+  analysis?: {
+    emotionalState: string;
+    themes: string[];
+    riskLevel: number;
+    recommendedApproach: string;
+    progressIndicators: string[];
+  };
+  metadata?: {
+    technique: string;
+    goal: string;
+    progress: any[];
+  };
+}
+
+const API_BASE =    process.env.NEXT_PUBLIC_BACKEND_API_URL;
+
+// Helper function to get auth headers
+const getAuthHeaders = () => {
+  const token = localStorage.getItem("token");
+  return {
+    "Content-Type": "application/json",
+    Authorization: token ? `Bearer ${token}` : "",
+  };
+};
+
+export const createChatSession = async (): Promise<string> => {
   try {
-    const { sessionId } = params;
-    console.log(`Getting chat history for session ${sessionId}`);
+    console.log("Creating new chat session...");
+    const response = await fetch(`${API_BASE}/chat/sessions`, {
+      method: "POST",
+      headers: getAuthHeaders(),
+    });
 
+    if (!response.ok) {
+      const error = await response.json();
+      console.error("Failed to create chat session:", error);
+      throw new Error(error.error || "Failed to create chat session");
+    }
+
+    const data = await response.json();
+    console.log("Chat session created:", data);
+    return data.sessionId;
+  } catch (error) {
+    console.error("Error creating chat session:", error);
+    throw error;
+  }
+};
+
+export const sendChatMessage = async (
+  sessionId: string,
+  message: string
+): Promise<ApiResponse> => {
+  try {
+    console.log(`Sending message to session ${sessionId}:`, message);
     const response = await fetch(
-      `${BACKEND_API_URL}/chat/sessions/${sessionId}/history`,
+      `${API_BASE}/chat/sessions/${sessionId}/messages`,
       {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ message }),
       }
     );
 
     if (!response.ok) {
       const error = await response.json();
-      console.error("Failed to get chat history:", error);
-      return NextResponse.json(
-        { error: error.error || "Failed to get chat history" },
-        { status: response.status }
-      );
+      console.error("Failed to send message:", error);
+      throw new Error(error.error || "Failed to send message");
     }
 
     const data = await response.json();
-    console.log("Chat history retrieved successfully:", data);
+    console.log("Message sent successfully:", data);
+    return data;
+  } catch (error) {
+    console.error("Error sending chat message:", error);
+    throw error;
+  }
+};
 
-    // Format the response to match the frontend's expected format
-    const formattedMessages = data.map((msg: any) => ({
+export const getChatHistory = async (
+  sessionId: string
+): Promise<ChatMessage[]> => {
+  try {
+    console.log(`Fetching chat history for session ${sessionId}`);
+    const response = await fetch(
+      `${API_BASE}/chat/sessions/${sessionId}/history`,
+      {
+        headers: getAuthHeaders(),
+      }
+    );
+
+    if (!response.ok) {
+      const error = await response.json();
+      console.error("Failed to fetch chat history:", error);
+      throw new Error(error.error || "Failed to fetch chat history");
+    }
+
+    const data = await response.json();
+    console.log("Received chat history:", data);
+
+    if (!Array.isArray(data)) {
+      console.error("Invalid chat history format:", data);
+      throw new Error("Invalid chat history format");
+    }
+
+    // Ensure each message has the correct format
+    return data.map((msg: any) => ({
       role: msg.role,
       content: msg.content,
-      timestamp: msg.timestamp,
+      timestamp: new Date(msg.timestamp),
+      metadata: msg.metadata,
     }));
-
-    return NextResponse.json(formattedMessages);
   } catch (error) {
-    console.error("Error getting chat history:", error);
-    return NextResponse.json(
-      { error: "Failed to get chat history" },
-      { status: 500 }
-    );
+    console.error("Error fetching chat history:", error);
+    throw error;
   }
-}
+};
+
+export const getAllChatSessions = async (): Promise<ChatSession[]> => {
+  try {
+    console.log("Fetching all chat sessions...");
+    const response = await fetch(`${API_BASE}/chat/sessions`, {
+      headers: getAuthHeaders(),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      console.error("Failed to fetch chat sessions:", error);
+      throw new Error(error.error || "Failed to fetch chat sessions");
+    }
+
+    const data = await response.json();
+    console.log("Received chat sessions:", data);
+
+    return data.map((session: any) => {
+      // Ensure dates are valid
+      const createdAt = new Date(session.createdAt || Date.now());
+      const updatedAt = new Date(session.updatedAt || Date.now());
+
+      return {
+        ...session,
+        createdAt: isNaN(createdAt.getTime()) ? new Date() : createdAt,
+        updatedAt: isNaN(updatedAt.getTime()) ? new Date() : updatedAt,
+        messages: (session.messages || []).map((msg: any) => ({
+          ...msg,
+          timestamp: new Date(msg.timestamp || Date.now()),
+        })),
+      };
+    });
+  } catch (error) {
+    console.error("Error fetching chat sessions:", error);
+    throw error;
+  }
+};

@@ -2,11 +2,13 @@ import { inngest } from "./index";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { logger } from "../utils/logger";
 
-// Initialize Gemini
-const genAI = new GoogleGenerativeAI(
-  process.env.GEMINI_API_KEY || "AIzaSyBCBz3wQu9Jjd_icCDZf-17CUO_O8IynwI"
-);
+const key = process.env.GEMINI_API_KEY || "AIzaSyCWQD7wsFV_OHCJLPoYdvwVCMQY3MIZPNg";
+if (!key) {
+  throw new Error("GEMINI_API_KEY environment variable is required");
+}
 
+// Initialize Gemini
+const genAI = new GoogleGenerativeAI(key);
 // Function to handle chat message processing
 export const processChatMessage = inngest.createFunction(
   {

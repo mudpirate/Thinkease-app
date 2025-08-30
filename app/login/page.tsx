@@ -9,10 +9,44 @@ import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Lock, Mail } from "lucide-react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+import { loginUser } from "@/lib/api/auth";
+import { useSession } from "@/lib/context/session-context";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { checkSession } = useSession();
+const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    try {
+      const response = await loginUser(email, password);
+
+      // Store the token in localStorage
+      localStorage.setItem("token", response.token);
+
+      // Update session state
+      await checkSession();
+
+      // Wait for state to update before redirecting
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      router.push("/dashboard");
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Invalid email or password. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <motion.div
@@ -31,7 +65,7 @@ export default function LoginPage() {
               Welcome back! Please sign in to continue your journey.
             </p>
           </div>
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-3">
               <div>
                 <label
@@ -66,7 +100,7 @@ export default function LoginPage() {
                     id="password"
                     type="password"
                     placeholder="Enter your password"
-                    className="pl-12 py-2 text-base rounded-xl bg-card bg-opacity-80 border border-primary focus:outline-none focus:ring-2 focus:ring-primary text-white placeholder:text-muted-foreground"
+                    className="pl-12 py-2 text-base rounded-xl bg-card bg-opacity-80 border border-primary focus:outline-none focus:ring-2 focus:ring-primary text-black placeholder:text-muted-foreground"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -79,8 +113,9 @@ export default function LoginPage() {
               className="w-full py-2 text-base rounded-xl font-bold bg-gradient-to-r from-primary to-primary/80 shadow-md hover:from-primary/80 hover:to-primary"
               size="lg"
               type="submit"
+              disabled={loading}
             >
-              login
+              {loading ? "Logging in...." : "Login"}
             </Button>
           </form>
           <div className="my-6 border-t border-primary/10" />

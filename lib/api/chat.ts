@@ -41,7 +41,7 @@ export interface ApiResponse {
 }
 
 const API_BASE =
-  process.env.BACKEND_API_URL ||
+  process.env.NEXT_PUBLIC_BACKEND_API_URL ||
   "https://ai-therapist-agent-backend.onrender.com";
 
 // Helper function to get auth headers
@@ -76,35 +76,26 @@ export const createChatSession = async (): Promise<string> => {
   }
 };
 
-export const sendChatMessage = async (
-  sessionId: string,
-  message: string
-): Promise<ApiResponse> => {
+export async function sendChatMessage(sessionId: string, message: string) {
   try {
-    console.log(`Sending message to session ${sessionId}:`, message);
-    const response = await fetch(
-      `${API_BASE}/chat/sessions/${sessionId}/messages`,
-      {
-        method: "POST",
-        headers: getAuthHeaders(),
-        body: JSON.stringify({ message }),
-      }
-    );
+    const response = await fetch(`${API_BASE}/chat/sessions/${sessionId}/messages`, {
+      method: "POST",
+      headers: getAuthHeaders(), // ✅ use JWT headers
+     
+      body: JSON.stringify({ message }),
+    });
 
     if (!response.ok) {
-      const error = await response.json();
-      console.error("Failed to send message:", error);
-      throw new Error(error.error || "Failed to send message");
+      const text = await response.text(); // read raw error
+      throw new Error(`API error ${response.status}: ${text}`);
     }
 
-    const data = await response.json();
-    console.log("Message sent successfully:", data);
-    return data;
-  } catch (error) {
-    console.error("Error sending chat message:", error);
-    throw error;
+    return await response.json(); // always JSON
+  } catch (err) {
+    console.error("sendChatMessage failed:", err);
+    throw err;
   }
-};
+}
 
 export const getChatHistory = async (
   sessionId: string

@@ -20,7 +20,10 @@ const app = express();
 
 // Middleware
 app.use(helmet()); // Security headers
-app.use(cors()); // Enable CORS
+app.use(cors({
+  origin: "http://localhost:3000", // frontend
+  credentials: true
+}));
 app.use(express.json()); // Parse JSON bodies
 app.use(morgan("dev")); // HTTP request logger
 

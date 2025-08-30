@@ -54,15 +54,19 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
         const { password, ...safeUserData } = userData;
         setUser(safeUserData);
         console.log("SessionContext: User state updated:", safeUserData);
-      } else {
-        console.log("SessionContext: Failed to get user data");
+      } else if (response.status === 401) {
+        console.log("SessionContext: Token expired or invalid");
         setUser(null);
         localStorage.removeItem("token");
+      } else {
+        console.log("SessionContext: Failed to get user data");
+        // Don't remove token on other errors, just set user to null temporarily
+        setUser(null);
       }
     } catch (error) {
       console.error("SessionContext: Error checking session:", error);
+      // Don't remove token on network errors, just set user to null temporarily
       setUser(null);
-      localStorage.removeItem("token");
     } finally {
       setLoading(false);
     }

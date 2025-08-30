@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useToast } from "@/components/ui/use-toast";
 import {
   Select,
   SelectContent,
@@ -20,6 +21,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useSession } from "@/lib/context/session-context";
+import { logActivity } from "@/lib/api/activity";
 
 const activityTypes = [
   { id: "meditation", name: "Meditation" },
@@ -46,61 +49,63 @@ export function ActivityLogger({
   const [name, setName] = useState("");
   const [duration, setDuration] = useState("");
   const [description, setDescription] = useState("");
+  const { toast } = useToast();
+  const { user, isAuthenticated, loading } = useSession();
 
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   if (!isAuthenticated) {
-  //     toast({
-  //       title: "Authentication required",
-  //       description: "Please log in to log activities",
-  //       variant: "destructive",
-  //     });
-  //     return;
-  //   }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isAuthenticated) {
+      toast({
+        title: "Authentication required",
+        description: "Please log in to log activities",
+        variant: "destructive",
+      });
+      return;
+    }
 
-  //   if (!type || !name) {
-  //     toast({
-  //       title: "Missing information",
-  //       description: "Please fill in all required fields",
-  //       variant: "destructive",
-  //     });
-  //     return;
-  //   }
+    if (!type || !name) {
+      toast({
+        title: "Missing information",
+        description: "Please fill in all required fields",
+        variant: "destructive",
+      });
+      return;
+    }
 
-  //   setIsLoading(true);
-  //   try {
-  //     await logActivity({
-  //       type,
-  //       name,
-  //       description,
-  //       duration: duration ? parseInt(duration) : undefined,
-  //     });
+    setIsLoading(true);
+    try {
+      await logActivity({
+        type,
+        name,
+        description,
+        duration: duration ? parseInt(duration) : undefined,
+      });
 
-  //     // Reset form
-  //     setType("");
-  //     setName("");
-  //     setDuration("");
-  //     setDescription("");
+      // Reset form
+      setType("");
+      setName("");
+      setDuration("");
+      setDescription("");
 
-  //     toast({
-  //       title: "Activity logged successfully!",
-  //       description: "Your activity has been recorded.",
-  //     });
+      toast({
+        title: "Activity logged successfully!",
+        description: "Your activity has been recorded.",
+      });
 
-  //     onActivityLogged();
-  //     onOpenChange(false);
-  //   } catch (error) {
-  //     console.error("Error logging activity:", error);
-  //     toast({
-  //       title: "Error",
-  //       description:
-  //         error instanceof Error ? error.message : "Failed to log activity",
-  //       variant: "destructive",
-  //     });
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
+      onActivityLogged?.();
+      onOpenChange(false);
+    } catch (error) {
+      console.error("Error logging activity:", error);
+      toast({
+        title: "Error",
+        description:
+          error instanceof Error ? error.message : "Failed to log activity",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -109,7 +114,7 @@ export function ActivityLogger({
           <DialogTitle>Log Activity</DialogTitle>
           <DialogDescription>Record your wellness activity</DialogDescription>
         </DialogHeader>
-        <form className="space-y-4">
+        <form className="space-y-4" onClick={handleSubmit}>
           <div className="space-y-2">
             <Label>Activity Type</Label>
             <Select value={type} onValueChange={setType}>
