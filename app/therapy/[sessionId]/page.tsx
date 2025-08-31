@@ -186,7 +186,7 @@ export default function TherapyPage() {
     };
 
     initChat();
-  }, [sessionId]);
+  }, []);
 
   // Load all chat sessions
   useEffect(() => {
